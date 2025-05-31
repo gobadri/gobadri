@@ -1,6 +1,6 @@
 /*************************************************
 **************************************************
-    Copyright © 2025 Magic Plus. All Rights Reserved.
+    Copyright © 2025 GoBadri. All Rights Reserved.
     Brand Identity Designer: @GoBadri
     Brand Guidline | May 2025 | Version 1.0
 ------------------------------------------------
@@ -202,11 +202,15 @@ html{
   .hero{
     width: 100%;
     height: 100vh;
-    background-image: url("/assets/img/mascotBG.png");
-    object-fit: cover;
-    object-position: top left;
-    background-repeat: no-repeat;
-    background-size: 60%;
+    position: relative;
+  }
+
+  .hero > img{
+    position: absolute;
+    top: 0;
+    left: -15rem;
+    width: 70%;
+    z-index: -1;
   }
 
   .hero .container{
@@ -457,9 +461,11 @@ html{
       max-width: 3.125rem;
     }
 
-    .hero{
-      object-position: center center;
-      background-size: 100%;
+    .hero > img{
+      top: 0;
+      left: 50%;
+      translate: -50%;
+      width: 100%;
     }
   
     .hero .container{
@@ -480,8 +486,9 @@ html{
     }
 
     main{
+        margin-top: -5vh;
         width: 95%;
-        padding: 3rem .25rem;
+        padding: calc(var(--gap)*5) calc(var(--gap)*.5);
     }
 
     .container{
