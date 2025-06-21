@@ -497,6 +497,10 @@ html, body{
         max-width: 95%;
     }
 
+    .img-right{
+      grid-template-columns: 1fr;
+    }
+
     .img-right .content{
         width: 100%;
     }
@@ -508,6 +512,30 @@ html, body{
 
     .img-left .content{
         width: 100%;
+    }
+
+    .service{
+      width: 100%;
+      display: grid;
+      grid-template-columns: 30% 1fr;
+      grid-template-rows: 10% 1fr;
+    }
+
+    .service img{
+      grid-column: 1;
+      grid-row: 1 / -1;
+    }
+
+    .service h5, .service p{
+      grid-column: 2;
+    }
+
+    .service h5{
+      grid-row: 1;
+    }
+
+    .service p{
+      grid-row: 2;
     }
 
     .postdesign{
