@@ -183,7 +183,10 @@ html, body{
   }
 
   .socialmedia ul img{
-    width: calc(var(--gap)*2);
+
+    --factor: 2;
+
+    width: calc(var(--gap)*var(--factor));
     filter: brightness(0) invert(1);
     transition: all 250ms ease-in;
   }
@@ -457,6 +460,14 @@ html, body{
     .header-container{
       flex-direction: column;
       gap: calc(var(--gap)*1.5);
+    }
+
+    .socialmedia ul{
+      gap: calc(var(--gap)*3)
+    }
+
+    .socialmedia ul img{
+      --factor: 3;
     }
 
     header img{
