@@ -309,6 +309,7 @@ html, body{
   }
 
   .grid-content{
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: calc(var(--gap) * 1);
