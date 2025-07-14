@@ -371,16 +371,18 @@ main{
   padding: 0;
   height: fit-content;
   display: grid;
-  gap: calc(var(--gap)*2.5);
+  gap: calc(var(--gap)/2.5);
 }
 
 .gallery-item h3{
+  padding-left: calc(var(--gap)*1.5);
   margin-top: 1rem;
   text-decoration: none;
   color: var(--clr-neutral-200);
 }
 
 .gallery-item p{
+  padding-left: calc(var(--gap)*1.5);
   font-style: italic;
   color: var(--clr-neutral-300);
 }
