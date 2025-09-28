@@ -28,11 +28,13 @@
   --clr-neutral-900: #111213;
   --clr-blue: #88e5e6;
   --clr-red: #e68892;
+  --clr-blue-darker: #79c7c9;
 
   --background: var(--clr-neutral-800);
   --foreground: var(--clr-neutral-700);
   --text-bright: var(--clr-neutral-200);
   --text-dim: var(--clr-neutral-500);
+  --text-black: var(--clr-neutral-900);
 
   
   --border-radius: 1rem;
@@ -170,10 +172,8 @@ header{
 }
 
 .header-container{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  place-content: center;
   width: 90%;
   margin-inline: auto;
 }
@@ -186,7 +186,7 @@ header{
 
 .socialmedia ul img{
 
-  --factor: 2;
+  --factor: 1.5;
 
   width: calc(var(--gap)*var(--factor));
   filter: brightness(0) invert(1);
@@ -200,6 +200,67 @@ header{
 header img{
   max-width: 6rem;
 }
+
+nav{
+  background-color: var(--clr-neutral-900);
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translate(-93%, -50%);
+  border: .75px solid var(--clr-neutral-700);
+  border-left: none;
+  border-radius: 0 calc(var(--border-radius)*1.5) calc(var(--border-radius)*1.5) 0;
+  transition: transform 350ms ease;
+}
+
+nav:hover,
+nav:focus-within{
+  transform: translate(0, -50%);
+}
+
+.nav-wrapper{
+  inset: 0;
+  position: relative;
+  padding: calc(var(--gap)*3) calc(var(--gap)*3.5) calc(var(--gap)*3) calc(var(--gap)*2.5);
+  display: grid;
+  gap: calc(var(--gap)*5);
+}
+
+.nav-wrapper::after{
+  position: absolute;
+  content: "";
+  width: .3rem;
+  border-radius: 100vh;
+  aspect-ratio: 1/16;
+  background-color: var(--clr-blue);
+  right: .75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.main-nav ul{
+  list-style: none;
+  display: grid;
+  gap: calc(var(--gap)*.5);
+}
+
+.main-nav ul li a{
+  text-decoration: none;
+  color: var(--text-bright);
+  display: inline-block;
+  width: 100%;
+  padding: 1rem .5rem;
+  transition: all 350ms ease;
+}
+
+.main-nav ul li a:hover{
+  color: var(--text-black);
+  background-color: var(--clr-red);
+}
+
+
+
+
 /*----------------------------------------------
 ------------------------------------------------
 3. Main Body Styles
@@ -472,6 +533,11 @@ footer{
   gap: calc(var(--gap) * 2);
 }
 
+.copyrights{
+  display: grid;
+  gap: var(--gap);
+}
+
 .copyrights ul{
   font-family: var(--ff);
   list-style: none;
@@ -548,18 +614,6 @@ footer{
   header img{
     max-width: 3.125rem;
   }
-
-  /* .hero > img{
-    top: 0;
-    left: 0;
-    translate: -50%;
-    width: 180%;
-  } */
-
-  /* .hero .container{
-    gap: calc(var(--gap) * 0.25);
-    margin-block-start: -90%;
-  } */
 
   .hero h1{
     margin-top: calc(var(--gap) * 75);
