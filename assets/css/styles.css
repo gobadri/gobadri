@@ -206,12 +206,12 @@ nav{
   position: fixed;
   left: 0;
   top: 50%;
-  transform: translate(-93%, -50%);
+  transform: translate(-95%, -50%);
   border: .75px solid var(--clr-neutral-700);
   border-left: none;
   border-radius: 0 calc(var(--border-radius)*1.5) calc(var(--border-radius)*1.5) 0;
   transition: transform 350ms ease;
-    opacity: 0.7;
+  opacity: 0.35;
 }
 
 nav:hover,
