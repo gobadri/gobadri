@@ -25,7 +25,7 @@
   --clr-neutral-600: #282e36;
   --clr-neutral-700: #202229;
   --clr-neutral-800: #17181a;
-  --clr-neutral-900: hsla(210, 6%, 7%, var(--opacity));
+  --clr-neutral-900: hsl(210, 6%, 7%);
   --clr-blue: #88e5e6;
   --clr-red: #e68892;
   --clr-blue-darker: #79c7c9;
@@ -35,6 +35,8 @@
   --text-bright: var(--clr-neutral-200);
   --text-dim: var(--clr-neutral-500);
   --text-black: var(--clr-neutral-900);
+  --clr-nav-close: hsla(210, 6%, 7%, 0.35);
+  --clr-nav-open: hsla(210, 6%, 7%, 1);
 
   
   --border-radius: 1rem;
@@ -202,9 +204,7 @@ header img{
 }
 
 nav{
-  --opacity: 0.35;
-    
-  background-color: var(--clr-neutral-900);
+  background-color: var(--clr-nav-close);
   position: fixed;
   left: 0;
   top: 50%;
@@ -212,15 +212,13 @@ nav{
   border: .75px solid var(--clr-neutral-700);
   border-left: none;
   border-radius: 0 calc(var(--border-radius)*1.5) calc(var(--border-radius)*1.5) 0;
-  transition: transform 350ms ease;
+  transition: all 250ms ease;
 }
 
 nav:hover,
 nav:focus-within{
-  --opacity: 1;
-    
   transform: translate(0, -50%);
-  background-color: var(--clr-neutral-900);
+  background-color: var(--clr-nav-open);
 }
 
 .nav-wrapper{
