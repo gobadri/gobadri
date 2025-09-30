@@ -236,7 +236,7 @@ nav:focus-within{
   content: "";
   width: .25rem;
   border-radius: 100vh;
-  aspect-ratio: 1/16;
+  aspect-ratio: 1/18;
   background-color: var(--clr-blue);
   right: .25rem;
   top: 50%;
