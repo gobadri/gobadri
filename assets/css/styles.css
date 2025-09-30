@@ -26,7 +26,7 @@
   --clr-neutral-700: #202229;
   --clr-neutral-800: #17181a;
   --clr-neutral-900: hsla(210, 6%, 7%, var(--opacity));
-  --opacity: var(--opacity-value), 1;
+  --opacity: var(--opacity-value);
   --clr-blue: #88e5e6;
   --clr-red: #e68892;
   --clr-blue-darker: #79c7c9;
