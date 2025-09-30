@@ -25,7 +25,8 @@
   --clr-neutral-600: #282e36;
   --clr-neutral-700: #202229;
   --clr-neutral-800: #17181a;
-  --clr-neutral-900: hsl(210, 6, 7);
+  --clr-neutral-900: hsla(210, 6%, 7%, var(--opacity));
+  --opacity: 1;
   --clr-blue: #88e5e6;
   --clr-red: #e68892;
   --clr-blue-darker: #79c7c9;
@@ -202,7 +203,9 @@ header img{
 }
 
 nav{
-  background-color: var(--clr-neutral-900, .35);
+  --opacity: 0.35;
+    
+  background-color: var(--clr-neutral-900);
   position: fixed;
   left: 0;
   top: 50%;
@@ -215,6 +218,8 @@ nav{
 
 nav:hover,
 nav:focus-within{
+    --opacity: 1;
+    
   transform: translate(0, -50%);
   background-color: var(--clr-neutral-900);
 }
