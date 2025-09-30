@@ -202,7 +202,7 @@ header img{
 }
 
 nav{
-  background-color: var(--clr-neutral-900 / .35);
+  background-color: var(--clr-neutral-900, .35);
   position: fixed;
   left: 0;
   top: 50%;
