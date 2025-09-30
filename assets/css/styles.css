@@ -202,7 +202,7 @@ header img{
 }
 
 nav{
-  background-color: var(--clr-neutral-900) / .35;
+  background-color: var(--clr-neutral-900 / .35);
   position: fixed;
   left: 0;
   top: 50%;
@@ -216,7 +216,7 @@ nav{
 nav:hover,
 nav:focus-within{
   transform: translate(0, -50%);
-  background-color: var(--clr-neutral-900) / 1;
+  background-color: var(--clr-neutral-900);
 }
 
 .nav-wrapper{
