@@ -28,15 +28,38 @@
   --clr-neutral-900: hsl(210, 6%, 7%);
   --clr-blue: #88e5e6;
   --clr-red: #e68892;
+  --clr-intersect: #8e505d;
   --clr-blue-darker: #79c7c9;
 
-  --background: var(--clr-neutral-800);
-  --foreground: var(--clr-neutral-700);
-  --text-bright: var(--clr-neutral-200);
+  --background: var(--clr-neutral-200);
+  --foreground: var(--clr-neutral-100);
+  --surface: var(--clr-neutral-900);
+  --surface-dark: var(--clr-neutral-300);
+  --text-bright: var(--clr-neutral-800);
   --text-dim: var(--clr-neutral-500);
-  --text-black: var(--clr-neutral-900);
-  --clr-nav-close: hsla(210, 6%, 7%, 0.5);
-  --clr-nav-open: hsla(210, 6%, 7%, 1);
+  --text-black: var(--clr-neutral-100);
+  --clr-nav-close: hsla(210, 6%, 93%, 0.5);
+  --clr-nav-open: hsla(210, 6%, 93%, 1);
+  --shadow: var(--clr-neutral-500);
+  --accent: var(--clr-red);
+  --accent-inverted: var(--clr-blue);
+  --white: var(--clr-neutral-200);
+
+  @media (prefers-color-scheme: dark) {
+    --background: var(--clr-neutral-800);
+    --foreground: var(--clr-neutral-700);
+    --surface: var(--clr-neutral-100);
+    --surface-dark: var(--clr-neutral-600);
+    --text-bright: var(--clr-neutral-200);
+    --text-dim: var(--clr-neutral-500);
+    --text-black: var(--clr-neutral-900);
+    --clr-nav-close: hsla(210, 6%, 7%, 0.5);
+    --clr-nav-open: hsla(210, 6%, 7%, 1);
+    --shadow: var(--clr-neutral-900);
+    --accent: var(--clr-blue);
+    --accent-inverted: var(--clr-blue);
+    --white: var(--clr-neutral-200);
+  }  
 
   
   --border-radius: 1rem;
@@ -108,13 +131,13 @@ body {
 }
 
 h1{
-  color: var(--clr-blue);
+  color: var(--accent);
   font-weight: var(--fw-800);
   font-size: calc(var(--fs) * 3);
 }
 
 h2{
-  color: var(--clr-blue);
+  color: var(--accent);
   font-weight: var(--fw-600);
   font-size: calc(var(--fs) * 1.5);
   margin-block: var(--gap);
@@ -141,10 +164,10 @@ p{
 button{
   background: none;
   cursor: pointer;
-  border: 2px solid var(--clr-neutral-100);
+  border: 2px solid var(--text-bright);
   border-radius: calc(var(--gap) * .5);
   padding: calc(var(--gap) * .5) calc(var(--gap) * 1);
-  color: var(--clr-neutral-100);
+  color: var(--text-bright);
   font-family: var(-ff);
   font-size: calc(var(--fs) * 1.2);
   transition: all 250ms ease-in;
@@ -152,8 +175,8 @@ button{
 
 button:hover{
   border-radius: calc(var(--gap) * .75);
-  color: var(--clr-neutral-800);
-  background: var(--clr-neutral-100);;
+  color: var(--background);
+  background: var(--surface);
   font-family: var(-ff);
 }
 /*----------------------------------------------
@@ -167,7 +190,7 @@ header{
   top: 0;
   background-color: var(--foreground);
   width: 100%;
-  filter: drop-shadow(0 2px 10px var(--clr-neutral-900));
+  filter: drop-shadow(0 2px 10px var(--shadow));
   border-radius: 0 0 calc(var(--border-radius)*3) calc(var(--border-radius)*3);
 
   z-index: 999;
@@ -178,6 +201,26 @@ header{
   place-content: center;
   width: 90%;
   margin-inline: auto;
+}
+
+.header-container svg{
+  width: 6rem;
+}
+
+.header-container svg #path1236{
+  fill: var(--clr-blue);
+}
+
+.header-container svg #path1241{
+  fill: var(--clr-red);
+}
+
+.header-container svg #path1250{
+  fill: var(--clr-intersect);
+}
+
+.header-container svg #path1243{
+  fill: var(--surface);
 }
 
 .socialmedia ul{
@@ -191,17 +234,18 @@ header{
   --factor: 1.5;
 
   width: calc(var(--gap)*var(--factor));
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(0);
   transition: all 250ms ease-in;
+
+  @media (prefers-color-scheme: dark){
+    filter: brightness(0) invert(1);
+  }
 }
 
 .socialmedia ul img:hover{
   filter: brightness(1) invert(0);
 }
 
-header img{
-  max-width: 6rem;
-}
 
 nav{
   background-color: var(--clr-nav-close);
@@ -211,7 +255,7 @@ nav{
   left: 0;
   top: 50%;
   transform: translate(-95%, -50%);
-  border: .75px solid var(--clr-neutral-700);
+  border: .75px solid var(--foreground);
   border-left: none;
   border-radius: 0 calc(var(--border-radius)*1.5) calc(var(--border-radius)*1.5) 0;
   transition: all 250ms ease;
@@ -237,7 +281,7 @@ nav:focus-within{
   width: .25rem;
   border-radius: 100vh;
   aspect-ratio: 1/18;
-  background-color: var(--clr-blue);
+  background-color: var(--accent);
   right: .25rem;
   top: 50%;
   transform: translateY(-50%);
@@ -260,7 +304,7 @@ nav:focus-within{
 
 .main-nav ul li a:hover{
   color: var(--text-black);
-  background-color: var(--clr-red);
+  background-color: var(--accent-inverted);
 }
 
 
@@ -278,14 +322,71 @@ nav:focus-within{
   position: fixed;
   transform: translateY(calc(var(--space-top) * -1));
   z-index: -1;
+  filter: blur(0px);
+  transition: none;
 }
 
-.hero > img{
+.hero > svg{
   position: absolute;
   top: 0;
   left: -15rem;
   width: 70%;
   z-index: -1;
+}
+
+.hero > svg #path1,
+.hero > svg #path2{
+  fill:var(--background);
+
+  @media (prefers-color-scheme: dark) {
+    fill:#668dff;
+    stroke-width:0.449593;
+    filter:url(#filter27);
+  }
+}
+
+.hero > svg #path5,
+.hero > svg #path3{
+  fill:var(--background);
+
+  @media (prefers-color-scheme: dark) {
+    fill:#99b3ff;
+    stroke-width:0.449593;
+    filter:url(#filter24);
+  }
+}
+
+.hero > svg #path9,
+.hero > svg #path8{
+  fill:var(--background);
+
+  @media (prefers-color-scheme: dark) {
+    fill:#ccd9ff;
+  stroke-width:0.449593;
+  filter:url(#filter24);
+  }
+}
+
+.hero > svg #path10,
+.hero > svg #path11{
+  fill: var(--foreground);
+
+  @media (prefers-color-scheme: dark) {
+    fill:#ccd9ff;
+    stroke-width:0.449593;
+    filter:url(#filter26);
+  }
+}
+
+.hero > svg #path18{
+  fill: var(--background);
+  stroke-width:0.133196
+}
+
+.hero > svg #path7{
+  stroke-width:0.449593;
+  filter: url(#filter26);
+  stroke: var(--mascot-blue-light);
 }
 
 .hero .container{
@@ -295,12 +396,12 @@ nav:focus-within{
 .hero h1{
   margin-top: 35%;
   justify-self: start;
-  color: var(--clr-neutral-100);
+  color: var(--text-bright);
 }
 
 .hero h3{
   justify-self: start;
-  color: var(--clr-neutral-300);
+  color: var(--text-dim);
 }
 
 .hero a{
@@ -349,7 +450,7 @@ main{
   object-fit: cover;
   object-position: top center;
   padding: 0;
-  border: 0.5px solid var(--clr-neutral-300);
+  border: 0.5px solid var(--surface);
   border-radius: calc(2*var(--border-radius));
 }
 
@@ -391,14 +492,18 @@ main{
   padding: calc(var(--gap) * 1);
   place-items: center;
   gap: calc(var(--gap) / 3);
-  border: 0.5px solid var(--clr-neutral-300);
+  border: 0.5px solid var(--surface);
   border-radius: calc(var(--border-radius)*1.5) !important;
   overflow: hidden;
 }
 
-.grid-item img{
+.grid-item svg{
   width: 100%;
   object-fit: cover;
+}
+
+.grid-item svg > path{
+  fill: var(--text-bright);
 }
 
 .full-width{
@@ -413,27 +518,27 @@ main{
   margin: 0;
   overflow: hidden;
   border: none;
-  background-color: var(--clr-neutral-600);
+  background-color: var(--surface-dark);
   padding: calc(var(--gap)*.5);
   border-radius: var(--gap);
   gap: calc(var(--gap)*.062);
 }
 
 .full-width-item h3{
-  color: var(--clr-neutral-300);
+  color: var(--surface-dark);
 }
 
-.neutral200{
-  background-color: var(--clr-neutral-200);
+.whiteBG{
+  background-color: var(--white);
   padding: calc(var(--gap)*2.5);
 }
 
-.neutral200 h3{
-  color: var(--clr-neutral-800);
+.whiteBG h3{
+  color: var(--text-bright) !important;
 }
 
-.neutral200 p{
-  color: var(--clr-neutral-600);
+.whiteBG p{
+  color: var(--text-dim);
 }
 
 .gallery-item{
@@ -448,17 +553,17 @@ main{
   padding-left: calc(var(--gap)*1.5);
   margin-top: 1rem;
   text-decoration: none;
-  color: var(--clr-neutral-200);
+  color: var(--text-bright);
 }
 
 .gallery-item p{
   padding-left: calc(var(--gap)*1.5);
   font-style: italic;
-  color: var(--clr-neutral-300);
+  color: var(--text-dim);
 }
 
 .grid-item a button{
-  border: 1px solid var(--clr-neutral-100);
+  border: 1px solid var(--surface);
   font-size: calc(var(--fs)*.85);
 }
 
@@ -494,7 +599,8 @@ section{
 
 .project-type{
   position: relative;
-  background-color: var(--text-dim);
+  background-color: var(--surface-dark);
+  color: var(--text-dim);
   margin-inline-end: calc(var(--gap)*1.5);
   padding-inline-end: calc(var(--gap)*1.5);
   padding-block: calc(var(--gap)*.4);
@@ -549,12 +655,12 @@ footer{
 }
 
 .copyrights ul a{
-  color: var(--clr-blue);
+  color: var(--accent);
 }
 
 .copyrights ul li{
   font-size: calc(var(--fs) / 1.2);
-  color: var(--clr-neutral-100);
+  color: var(--text-bright);
 }
 
 
