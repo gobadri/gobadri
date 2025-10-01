@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const hero = document.querySelector('.hero');
     const blurMax = 20; // Maximum blur in pixels
-    const blurStart = 100; // Scroll position (in px) where blur starts
-    const blurEnd = 105; // Scroll position (in px) where max blur is reached
+    const blurStart = 10; // Scroll position (in px) where blur starts
+    const blurEnd = 15; // Scroll position (in px) where max blur is reached
 
     function updateHeroBlur() {
         const scrollY = window.scrollY;
