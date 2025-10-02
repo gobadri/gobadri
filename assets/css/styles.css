@@ -530,13 +530,14 @@ body[data-theme="dark"] .theme-text {
 .hero h1{
   justify-self: start;
   color: var(--text-bright);
+  margin-top: 60svh !important;
 
   @media (width > 50em){
-    margin-top: 20%;
+    margin-top: 25vh !important;
   }
 
   @media (width > 75em){
-    margin-top: 35%;
+    margin-top: 55vh !important;
   }
 }
 
@@ -551,11 +552,11 @@ body[data-theme="dark"] .theme-text {
 }
 
 .scrolldownshape{
-  --sahpe-width: 1.2rem;
-  --shape-height: calc(var(--sahpe-width) * 2.5);
+  --shape-width: 1.2rem;
+  --shape-height: calc(var(--shape-width) * 1.5);
 
   margin-inline: auto;
-  margin-block-start: 3rem !important;
+  margin-block-start: 2rem !important;
   position: relative;
   width: var(--shape-width);
   height: var(--shape-height);
@@ -569,7 +570,8 @@ body[data-theme="dark"] .theme-text {
   transition: all 250ms ease;
 
   @media (width > 50em){
-    width: calc(var(--sahpe-width)*1.7);
+    --shape-width: calc(1.2rem * 1.7);
+
     margin-block-start: 5rem !important;
   }
 }
@@ -593,6 +595,10 @@ body[data-theme="dark"] .theme-text {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+
+  @media (width > 50em){
+    aspect-ratio: 1 / 12;
+  }
 }
 
 .scrolldownshape::after{
