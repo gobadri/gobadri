@@ -481,7 +481,7 @@ body[data-theme="dark"] .theme-text {
   transform: translateY(calc(var(--space-top) * -1));
   z-index: -1;
   filter: blur(0px);
-  transition: none;
+  transition: filter 350ms ease;
 }
 
 .heroBG{
@@ -517,7 +517,7 @@ body[data-theme="dark"] .theme-text {
   }
 }
 
-.herBG[data-theme="dark"]{
+[data-theme="dark"]{
   .heroBG{
     background-image: url(/assets/img/mascotBG.svg); 
   }
@@ -548,6 +548,65 @@ body[data-theme="dark"] .theme-text {
 .hero a{
   justify-self: start;
   margin-top: var(--gap);
+}
+
+.scrolldownshape{
+  --sahpe-width: 1.2rem;
+  --shape-height: calc(var(--sahpe-width) * 2.5);
+
+  margin-inline: auto;
+  margin-block-start: 3rem !important;
+  position: relative;
+  width: var(--shape-width);
+  height: var(--shape-height);
+  border-radius: 100vh;
+  border: 2px solid var(--surface);
+  opacity: .5;
+  animation-name: mouse;
+  animation-duration: 4.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  transition: all 250ms ease;
+
+  @media (width > 50em){
+    width: calc(var(--sahpe-width)*1.7);
+    margin-block-start: 5rem !important;
+  }
+}
+
+@keyframes mouse {
+  0% {transform: translateY(0);}
+  50% {transform: translateY(10px);}
+  100% {transform: translateY(0);}
+}
+
+.scrolldownshape:hover{
+  opacity: 1;
+}
+
+.scrolldownshape::before{
+  position: absolute;
+  content: "";
+  width: 2px;
+  aspect-ratio: 1 / 7;
+  background-color: var(--surface);
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scrolldownshape::after{
+  position: absolute;
+  content: "SCROLL DOWN";
+  font-family: inherit;
+  font-weight: 200;
+  text-align: center;
+  font-size: calc(var(--fs)*.55);
+  color: var(--surface);
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: calc(var(--fs)*.25);
+  top: calc(var(--shape-height)*1.07);
 }
 
 main{
