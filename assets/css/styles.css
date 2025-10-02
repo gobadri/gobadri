@@ -364,9 +364,6 @@ THEME TOGGLE
 
 /* Container for the switch and text */
 .theme-switch-wrapper {
-  display: none;
-
-  @media (width > 50em){
     display: grid;
     place-content: center;
     gap: calc(var(--gap)*.5);
@@ -374,7 +371,6 @@ THEME TOGGLE
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-  }
 }
 
 .theme-toggle-description{
@@ -386,10 +382,19 @@ THEME TOGGLE
 
 /* The actual label that becomes the switch track */
 .theme-switch {
+  --track-width: 3rem;
+  --track-height: 1.5rem;
+
   position: relative;
   display: inline-block;
-  width: 3.75rem; /* Width of the track */
-  height: 2.125rem; /* Height of the track */
+  width: var(--track-width); /* Width of the track */
+  height: var(--track-height); /* Height of the track */
+  justify-self: center;
+
+  @media (width > 50em){
+    --track-width: 4rem;
+    --track-height: 2rem;
+  }
 }
 
 /* Hide the default browser checkbox */
@@ -413,10 +418,10 @@ THEME TOGGLE
 .slider:before {
   position: absolute;
   content: "";
-  height: 1.625rem; /* Size of the thumb */
+  height: calc(var(--track-height)*.5); /* Size of the thumb */
   aspect-ratio: 1 / 1;
-  left: .25rem; /* Starting position inside the track */
-  bottom: .25rem;
+  left: calc(var(--track-height)*.25); /* Starting position inside the track */
+  bottom: calc(var(--track-height)*.25);
   background-color: var(--text-bright); /* Light color for the thumb */
   transition: 0.4s;
   border-radius: 100vh; /* Makes the thumb circular */
@@ -425,14 +430,14 @@ THEME TOGGLE
 .slider:after{
   position: absolute;
   content: "";
-  height: 1.6rem; /* Size of the thumb */
   aspect-ratio: 1 / 1;
-  left: .3rem; /* Starting position inside the track */
-  bottom: .3rem;
+  left: calc(var(--track-height)*.25); /* Starting position inside the track */
+  bottom: calc(var(--track-height)*.25);
   background-image: url(/assets/img/dark\ theme.svg);
   background-repeat: no-repeat;
   object-fit: cover;
-  width: 100%;
+  background-size: calc(var(--track-height)*.5);
+  width: calc(var(--track-height)*.5);
   aspect-ratio: 1 / 1;
   transition: 0.4s;
 }
@@ -444,11 +449,11 @@ THEME TOGGLE
 
 /* Move the slider thumb to the right when checked */
 #theme-toggle:checked + .slider:before {
-  transform: translateX(1.625rem); /* 60px (track width) - 34px (track height) = 26px */
+  transform: translateX(var(--track-height)); /* 60px (track width) - 34px (track height) = 26px */
 }
 
 #theme-toggle:checked + .slider:after {
-  transform: translateX(1.625rem); /* 60px (track width) - 34px (track height) = 26px */
+  transform: translateX(var(--track-height)); /* 60px (track width) - 34px (track height) = 26px */
   background-image: url(/assets/img/light\ theme.svg);
 }
 
