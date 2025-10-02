@@ -25,7 +25,7 @@
   --clr-neutral-600: #282e36;
   --clr-neutral-700: #202229;
   --clr-neutral-800: #17181a;
-  --clr-neutral-900: hsl(210, 6%, 7%);
+  --clr-neutral-900: #111213;
   --clr-blue: #88e5e6;
   --clr-red: #e68892;
   --clr-intersect: #8e505d;
@@ -68,6 +68,41 @@
   --fs: 1rem;
   --width: 80%;
   --space-top: 95vh;
+
+
+
+
+[data-theme="dark"] {
+    --background: var(--clr-neutral-800);
+    --foreground: var(--clr-neutral-700);
+    --surface: var(--clr-neutral-100);
+    --surface-dark: var(--clr-neutral-600);
+    --text-bright: var(--clr-neutral-200);
+    --text-dim: var(--clr-neutral-500);
+    --text-black: var(--clr-neutral-900);
+    --clr-nav-close: hsla(210, 6%, 7%, 0.5);
+    --clr-nav-open: hsla(210, 6%, 7%, 1);
+    --shadow: var(--clr-neutral-900);
+    --accent: var(--clr-blue);
+    --accent-inverted: var(--clr-blue);
+    --white: var(--clr-neutral-200);
+}
+
+[data-theme="light"] {
+  --background: var(--clr-neutral-200);
+  --foreground: var(--clr-neutral-100);
+  --surface: var(--clr-neutral-900);
+  --surface-dark: var(--clr-neutral-300);
+  --text-bright: var(--clr-neutral-800);
+  --text-dim: var(--clr-neutral-500);
+  --text-black: var(--clr-neutral-100);
+  --clr-nav-close: hsla(210, 6%, 93%, 0.5);
+  --clr-nav-open: hsla(210, 6%, 93%, 1);
+  --shadow: var(--clr-neutral-500);
+  --accent: var(--clr-red);
+  --accent-inverted: var(--clr-blue);
+  --white: var(--clr-neutral-200);
+}
 }
 
 * {
@@ -197,6 +232,7 @@ header{
 }
 
 .header-container{
+  position: relative;
   display: grid;
   place-content: center;
   width: 90%;
@@ -308,6 +344,116 @@ nav:focus-within{
 }
 
 
+/*----------------------------------------------
+------------------------------------------------
+THEME TOGGLE
+------------------------------------------------
+----------------------------------------------*/
+
+/* Container for the switch and text */
+.theme-switch-wrapper {
+  display: none;
+
+  @media (width > 50em){
+    display: grid;
+    place-content: center;
+    gap: calc(var(--gap)*.5);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.theme-toggle-description{
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: .125em;
+  font-size: calc(var(--fs)*.65);
+}
+
+/* The actual label that becomes the switch track */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 3.75rem; /* Width of the track */
+  height: 2.125rem; /* Height of the track */
+}
+
+/* Hide the default browser checkbox */
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider/track itself */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--background);
+  transition: 0.4s;
+  border-radius: 100vh;
+}
+
+/* The circular thumb/handle */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.625rem; /* Size of the thumb */
+  aspect-ratio: 1 / 1;
+  left: .25rem; /* Starting position inside the track */
+  bottom: .25rem;
+  background-color: var(--text-bright); /* Light color for the thumb */
+  transition: 0.4s;
+  border-radius: 100vh; /* Makes the thumb circular */
+}
+
+.slider:after{
+  position: absolute;
+  content: "";
+  height: 1.6rem; /* Size of the thumb */
+  aspect-ratio: 1 / 1;
+  left: .3rem; /* Starting position inside the track */
+  bottom: .3rem;
+  background-image: url(/assets/img/dark\ theme.svg);
+  background-repeat: no-repeat;
+  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  transition: 0.4s;
+}
+
+/* * Styles when the checkbox is checked (Dark mode is ON)
+ * The [data-theme="dark"] selector is used here to match the site's colors
+ * when the dark theme is active, regardless of the system setting.
+ */
+
+/* Move the slider thumb to the right when checked */
+#theme-toggle:checked + .slider:before {
+  transform: translateX(1.625rem); /* 60px (track width) - 34px (track height) = 26px */
+}
+
+#theme-toggle:checked + .slider:after {
+  transform: translateX(1.625rem); /* 60px (track width) - 34px (track height) = 26px */
+  background-image: url(/assets/img/light\ theme.svg);
+}
+
+/* Change the track background color when checked */
+#theme-toggle:checked + .slider {
+  background-color: var(--background); /* A distinct color for "on" */
+}
+
+/* * Additional Styling for Light/System Theme
+ * Let's change the color of the text next to the toggle
+ */
+body[data-theme="dark"] .theme-text {
+  color: var(--text-bright);
+}
+
+
+
 
 
 /*----------------------------------------------
@@ -318,7 +464,7 @@ nav:focus-within{
 
 .hero{
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   position: fixed;
   transform: translateY(calc(var(--space-top) * -1));
   z-index: -1;
@@ -326,73 +472,43 @@ nav:focus-within{
   transition: none;
 }
 
-.hero > svg{
+.heroBG{
+  background-image: url(/assets/img/mascotBGW.svg);
   position: absolute;
-  top: 0rem;
-  left: -30rem;
+  top: 10%;
+  left: -120%;
   width: 220%;
   z-index: -1;
+  aspect-ratio: 1 / 1;
 
   @media (width > 50em){
-    top: 0rem;
-    left: -30rem;
-    width: 100%;
+    top: -10%;
+    left: -30%;
+    width: 120%;
+    
+  }
+
+  @media (width > 70em){
+    top: -10%;
+    left: -30%;
+    width: 70%;
+  }
+
+  @media (prefers-color-scheme: dark){
+    background-image: url(/assets/img/mascotBG.svg);
   }
 }
 
-.hero > svg #path1,
-.hero > svg #path2{
-  fill:var(--background);
-
-  @media (prefers-color-scheme: dark) {
-    fill:#668dff;
-    stroke-width:0.449593;
-    filter:url(#filter27);
+[data-theme="light"]{
+  .heroBG{
+    background-image: url(/assets/img/mascotBGW.svg); 
   }
 }
 
-.hero > svg #path5,
-.hero > svg #path3{
-  fill:var(--background);
-
-  @media (prefers-color-scheme: dark) {
-    fill:#99b3ff;
-    stroke-width:0.449593;
-    filter:url(#filter24);
+.herBG[data-theme="dark"]{
+  .heroBG{
+    background-image: url(/assets/img/mascotBG.svg); 
   }
-}
-
-.hero > svg #path9,
-.hero > svg #path8{
-  fill:var(--background);
-
-  @media (prefers-color-scheme: dark) {
-    fill:#ccd9ff;
-  stroke-width:0.449593;
-  filter:url(#filter24);
-  }
-}
-
-.hero > svg #path10,
-.hero > svg #path11{
-  fill: var(--foreground);
-
-  @media (prefers-color-scheme: dark) {
-    fill:#ccd9ff;
-    stroke-width:0.449593;
-    filter:url(#filter26);
-  }
-}
-
-.hero > svg #path18{
-  fill: var(--background);
-  stroke-width:0.133196
-}
-
-.hero > svg #path7{
-  stroke-width:0.449593;
-  filter: url(#filter26);
-  stroke: var(--mascot-blue-light);
 }
 
 .hero .container{
