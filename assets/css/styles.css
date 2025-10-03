@@ -406,10 +406,14 @@ THEME TOGGLE
 
 /* The slider/track itself */
 .slider {
+  --track-padding: 4px;
+
   position: absolute;
   cursor: pointer;
   inset: 0;
   background-color: var(--background);
+  border: var(--track-padding) solid var(--background);
+
   transition: 0.4s;
   border-radius: 100vh;
 }
@@ -418,10 +422,10 @@ THEME TOGGLE
 .slider:before {
   position: absolute;
   content: "";
-  height: calc(var(--track-height)*.5); /* Size of the thumb */
+  height: 100%; /* Size of the thumb */
   aspect-ratio: 1 / 1;
-  left: calc(var(--track-height)*.25); /* Starting position inside the track */
-  bottom: calc(var(--track-height)*.25);
+  left: 0; /* Starting position inside the track */
+  bottom: 0;
   background-color: var(--text-bright); /* Light color for the thumb */
   transition: 0.4s;
   border-radius: 100vh; /* Makes the thumb circular */
@@ -431,13 +435,13 @@ THEME TOGGLE
   position: absolute;
   content: "";
   aspect-ratio: 1 / 1;
-  left: calc(var(--track-height)*.25); /* Starting position inside the track */
-  bottom: calc(var(--track-height)*.25);
+  left: 0; /* Starting position inside the track */
+  top: 0;
   background-image: url(/assets/img/dark\ theme.svg);
   background-repeat: no-repeat;
   object-fit: cover;
-  background-size: calc(var(--track-height)*.5);
-  width: calc(var(--track-height)*.5);
+  background-size: calc(var(--track-height) - calc(var(--track-padding)*2));
+  width: 100%;
   aspect-ratio: 1 / 1;
   transition: 0.4s;
 }
@@ -449,11 +453,15 @@ THEME TOGGLE
 
 /* Move the slider thumb to the right when checked */
 #theme-toggle:checked + .slider:before {
-  transform: translateX(var(--track-height)); /* 60px (track width) - 34px (track height) = 26px */
+  --translate: calc(var(--track-height) - calc(var(--track-height)*.1));
+
+  transform: translateX(var(--translate)); /* 60px (track width) - 34px (track height) = 26px */
 }
 
 #theme-toggle:checked + .slider:after {
-  transform: translateX(var(--track-height)); /* 60px (track width) - 34px (track height) = 26px */
+  --translate: calc(var(--track-height) - calc(var(--track-height)*.1));
+
+  transform: translateX(var(--translate)); /* 60px (track width) - 34px (track height) = 26px */
   background-image: url(/assets/img/light\ theme.svg);
 }
 
