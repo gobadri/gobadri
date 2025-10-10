@@ -29,7 +29,8 @@
   --clr-blue: #88e5e6;
   --clr-red: #e68892;
   --clr-intersect: #8e505d;
-  --clr-blue-darker: #79c7c9;
+  --clr-blue-darker: #4cc5c9;
+  --clr-red-darker: #da6571;
 
   --background: var(--clr-neutral-200);
   --foreground: var(--clr-neutral-100);
@@ -40,11 +41,10 @@
   --text-black: var(--clr-neutral-100);
   --clr-nav-close: hsla(210, 6%, 93%, 0.5);
   --clr-nav-open: hsla(210, 6%, 93%, 1);
-  --shadow: var(--clr-neutral-500);
+  --shadow: hsl(215, 12%, 38% / .25);
   --accent: var(--clr-red);
-  --accent-inverted: var(--clr-blue);
+  --accent-inverted: var(--clr-blue-darker);
   --white: var(--clr-neutral-200);
-  --clr-invers-glass: hsla(210, 6%, 7%, 0.25);
 
   @media (prefers-color-scheme: dark) {
     --background: var(--clr-neutral-800);
@@ -56,11 +56,10 @@
     --text-black: var(--clr-neutral-900);
     --clr-nav-close: hsla(210, 6%, 7%, 0.5);
     --clr-nav-open: hsla(210, 6%, 7%, 1);
-    --shadow: var(--clr-neutral-900);
+    --shadow: hsl(210, 6%, 7% / .5);
     --accent: var(--clr-blue);
-    --accent-inverted: var(--clr-blue);
+    --accent-inverted: var(--clr-red-darker);
     --white: var(--clr-neutral-200);
-    --clr-invers-glass: hsla(210, 6%, 93%, 0.25);
   }  
 
   
@@ -86,7 +85,7 @@
     --clr-nav-open: hsla(210, 6%, 7%, 1);
     --shadow: var(--clr-neutral-900);
     --accent: var(--clr-blue);
-    --accent-inverted: var(--clr-blue);
+    --accent-inverted: var(--clr-red-darker);
     --white: var(--clr-neutral-200);
     --clr-invers-glass: hsla(210, 6%, 93%, 0.25);
 }
@@ -103,7 +102,7 @@
   --clr-nav-open: hsla(210, 6%, 93%, 1);
   --shadow: var(--clr-neutral-500);
   --accent: var(--clr-red);
-  --accent-inverted: var(--clr-blue);
+  --accent-inverted: var(--clr-blue-darker);
   --white: var(--clr-neutral-200);
   --clr-invers-glass: hsla(210, 6%, 7%, 0.25);
 }
@@ -226,13 +225,19 @@ button:hover{
 
 header{
   position: fixed;
-  top: 0;
+  top: var(--gap);
+  left: 50%;
+  transform: translateX(-50%);
   background-color: var(--foreground);
-  width: 100%;
-  filter: drop-shadow(0 2px 10px var(--shadow));
-  border-radius: 0 0 calc(var(--border-radius)*3) calc(var(--border-radius)*3);
+  width: 95%;
+  filter: drop-shadow(0 1px 3px var(--shadow));
+  border-radius: 100vh;
 
   z-index: 999;
+
+  @media (width > 70em){
+    width: 85%;
+  }
 }
 
 .header-container{
@@ -244,7 +249,11 @@ header{
 }
 
 .header-container svg{
-  width: 6rem;
+  width: 4rem;
+
+  @media (width > 35em){
+    width: 6rem;
+  }
 }
 
 .header-container svg #path1236{
@@ -261,6 +270,70 @@ header{
 
 .header-container svg #path1243{
   fill: var(--surface);
+}
+
+.back-btn {
+  
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.back-btn > a{
+  display: grid;
+  place-content: center;
+  gap: calc(var(--gap)*1.2);
+  text-align: center;
+  text-decoration: none;
+}
+
+.back-arrow{
+  --arrow-stroke: 1px;
+
+  position: relative;
+  height: var(--arrow-stroke);
+  aspect-ratio: 15 / 1;
+  border-radius: 100vh;
+  transform-origin: left;
+  background-color: var(--surface);
+  margin-inline: auto;
+  animation-name: arrow;
+  animation-duration: 4.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  transition: all 250ms ease;
+
+
+  &::before,
+  &::after{
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    height: inherit;
+    aspect-ratio: 5 / 1;
+    background-color: inherit;
+    transform-origin: inherit;
+  }
+
+  &::before{
+    rotate: -30deg;
+  }
+
+  &::after{
+    rotate: 30deg;
+  }
+
+  @media (width > 50em){
+    --arrow-stroke: 2px;
+  }
+}
+
+@keyframes arrow {
+  0% {transform: translateX(0);}
+  50% {transform: translateX(-50%);}
+  100% {transform: translateX(0);}
 }
 
 .socialmedia ul{
@@ -304,39 +377,55 @@ nav{
  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   position: fixed;
-  left: 0;
+  left: var(--gap);
   top: 50%;
-  transform: translate(-95%, -50%);
-  border: .75px solid var(--foreground);
-  border-left: none;
-  border-radius: 0 calc(var(--border-radius)*1.5) calc(var(--border-radius)*1.5) 0;
+  transform: translateY(-50%);
+  transform-origin: left;
+  width: .5rem;
+  height: 60svh;
+  border-radius: calc(var(--border-radius)*1.5);
   transition: all 250ms ease;
+
+  @media (width > 50em){
+    width: 1rem;
+  }
 }
 
-nav:hover,
-nav:focus-within{
-  transform: translate(0, -50%);
-  background-color: var(--clr-nav-open);
-}
-
-.nav-wrapper{
-  inset: 0;
-  position: relative;
-  padding: calc(var(--gap)*3) calc(var(--gap)*3.5) calc(var(--gap)*3) calc(var(--gap)*2.5);
-  display: grid;
-  gap: calc(var(--gap)*5);
-}
-
-.nav-wrapper::after{
+nav::after{
   position: absolute;
   content: "";
   width: .25rem;
   border-radius: 100vh;
   aspect-ratio: 1/18;
   background-color: var(--accent);
-  right: .25rem;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
+}
+
+nav:hover,
+nav:focus-within{
+  transform: translate(0, -50%);
+  background-color: var(--clr-nav-open);
+  width: 20rem;
+
+  &::after{
+    right: .25rem;
+    left: auto;
+  }
+}
+
+.nav-wrapper{
+  display: none;
+}
+
+nav:hover .nav-wrapper,
+nav:focus-within .nav-wrapper{
+  display: grid !important;
+  height: 100%;
+  grid-template-rows: 1fr auto;
+  inset: 0;
+  padding: calc(var(--gap)*3) calc(var(--gap)*3.5) calc(var(--gap)*3) calc(var(--gap)*2.5);
 }
 
 .main-nav ul{
@@ -347,6 +436,7 @@ nav:focus-within{
 
 .main-nav ul li a{
   text-decoration: none;
+  text-transform: uppercase;
   color: var(--text-bright);
   display: inline-block;
   width: 100%;
@@ -372,12 +462,13 @@ THEME TOGGLE
     place-content: center;
     gap: calc(var(--gap)*.5);
     position: absolute;
-    left: 0;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.theme-toggle-description{
+.theme-toggle-description,
+.back-btn-description{
   text-transform: uppercase;
   font-weight: 300;
   letter-spacing: .125em;
@@ -571,6 +662,7 @@ body[data-theme="dark"] .theme-text {
 .scrolldownshape{
   --shape-width: 1.2rem;
   --shape-height: calc(var(--shape-width) * 1.5);
+  --shape-stroke: 2px;
 
   margin-inline: auto;
   margin-block-start: 2rem !important;
@@ -578,7 +670,7 @@ body[data-theme="dark"] .theme-text {
   width: var(--shape-width);
   height: var(--shape-height);
   border-radius: 100vh;
-  border: 2px solid var(--surface);
+  border: var(--shape-stroke) solid var(--surface);
   opacity: .5;
   animation-name: mouse;
   animation-duration: 4.5s;
@@ -595,7 +687,8 @@ body[data-theme="dark"] .theme-text {
 
 @keyframes mouse {
   0% {transform: translateY(0);}
-  50% {transform: translateY(10px);}
+  20% {transform: translateY(10px);}
+  80% {transform: translateY(10px);}
   100% {transform: translateY(0);}
 }
 
@@ -606,7 +699,8 @@ body[data-theme="dark"] .theme-text {
 .scrolldownshape::before{
   position: absolute;
   content: "";
-  width: 2px;
+  width: var(--shape-stroke);
+  transform: translateY(var(--shape-stroke));
   aspect-ratio: 1 / 7;
   background-color: var(--surface);
   top: 0;
@@ -868,8 +962,7 @@ section{
   font-size: calc(var(--fs)*8);
   font-weight: 900;
   line-height: 7rem;
-  color: var(--text-dim);
-  -webkit-text-stroke: .5px var(--accent);
+  color: var(--accent-inverted);
   z-index: 1 !important;
 }
 
@@ -879,10 +972,15 @@ section{
 ------------------------------------------------
 ----------------------------------------------*/
 footer{
-  width: 100%;
+  width: 80%;
+  margin-inline: auto;
   background-color: var(--foreground);
   border-radius: calc(var(--border-radius)*3) calc(var(--border-radius)*3) 0 0;
   padding: var(--gap);
+
+  @media (width > 35em){
+    width: 80%;
+  }
 }
 
 .footer-container{
@@ -984,11 +1082,6 @@ footer{
       --fs: .7em;
   }
 
-  .header-container{
-    flex-direction: column;
-    gap: calc(var(--gap)*1.5);
-  }
-
   .socialmedia ul{
     gap: calc(var(--gap)*3)
   }
@@ -1018,6 +1111,11 @@ footer{
   main{
       width: 95%;
       padding: calc(var(--gap)*5) calc(var(--gap)*.5);
+  }
+
+  footer{
+    width: 95%;
+    padding: calc(var(--gap)*5) calc(var(--gap)*.5);
   }
 
   .container{
@@ -1079,10 +1177,6 @@ footer{
 
   #threeImg{
     width: 70%;
-  }
-
-  footer{
-    padding-block: calc(var(--gap) * 3);
   }
 
   .footer-container{
