@@ -937,7 +937,13 @@ section{
 .projects:first-child{
   grid-row: span 2;
   grid-column: span 2;
-  aspect-ratio: 1 / 1.25;
+  aspect-ratio: 1 / 1.35;
+}
+
+.projects:first-child img{
+  @media (width > 50em){
+    aspect-ratio: 1 / 1.2;
+  }
 }
 
 .values{
