@@ -533,7 +533,7 @@ THEME TOGGLE
 }
 
 
-  /* @media (width > 50em){
+  @media (width > 50em){
       .theme-switch{
         --track-width: 4rem;
         --track-height: 2rem;
@@ -545,7 +545,7 @@ THEME TOGGLE
         --track-width: 3rem;
         --track-height: 1.5rem;
     }
-  } */
+  }
 
 /* Hide the default browser checkbox */
 .theme-switch input {
