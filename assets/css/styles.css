@@ -238,6 +238,7 @@ header{
   @media (width > 70em){
     width: 85%;
   }
+  
 }
 
 .header-container{
@@ -253,6 +254,10 @@ header{
 
   @media (width > 35em){
     width: 6rem;
+  }
+
+  @media (height < 35em){
+    width: 4rem;
   }
 }
 
@@ -385,18 +390,23 @@ nav{
   height: 60svh;
   border-radius: calc(var(--border-radius)*1.5);
   transition: all 250ms ease;
+  z-index: 9999;
 
   @media (width > 50em){
     width: 1rem;
+  }
+
+  @media (height < 35em){
+    display: none;
   }
 }
 
 nav::after{
   position: absolute;
   content: "";
-  width: .25rem;
+  width: .125rem;
   border-radius: 100vh;
-  aspect-ratio: 1/18;
+  aspect-ratio: 1/32;
   background-color: var(--accent);
   left: 50%;
   top: 50%;
@@ -417,34 +427,69 @@ nav:focus-within{
 
 .nav-wrapper{
   display: none;
+  opacity: 0;
+  translate: -100% 0;
+  width: 0%;
+  pointer-events: none;
+  transition-property: pointer-events translate display opacity;
+  transition-behavior: allow-discrete;
+  transition-duration: 50ms;
+  
 }
 
 nav:hover .nav-wrapper,
 nav:focus-within .nav-wrapper{
   display: grid !important;
+  opacity: 1;
+  pointer-events: all;
+  translate: 0 0;
+  width: 100%;
   height: 100%;
   grid-template-rows: 1fr auto;
   inset: 0;
   padding: calc(var(--gap)*3) calc(var(--gap)*3.5) calc(var(--gap)*3) calc(var(--gap)*2.5);
+  transition-delay: 250ms;
+  transition-duration: 750ms;
+  
+  @starting-style{
+    opacity: 0;
+    translate: -100% 0;
+  }
+
+  .main-nav ul{
+    list-style: none;
+    display: grid;
+    gap: calc(var(--gap)*.5);
+    translate: 0 0;
+
+    @starting-style{
+      translate: -100% 0;
+    }
+  }
+
 }
 
 .main-nav ul{
-  list-style: none;
-  display: grid;
-  gap: calc(var(--gap)*.5);
+  display: none;
+  translate: -100% 0;
+  transition-property: display;
+  transition-behavior: allow-discrete;
+  transition-duration: 250ms;
+  transition-delay: 500ms;
 }
 
 .main-nav ul li a{
-  text-decoration: none;
-  text-transform: uppercase;
-  color: var(--text-bright);
-  display: inline-block;
-  width: 100%;
-  padding: 1rem .5rem;
-  transition: all 350ms ease;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--text-bright);
+    display: inline-block;
+    width: 100%;
+    padding: 1rem .5rem;
+    transition: all 350ms ease;  
 }
 
-.main-nav ul li a:hover{
+.main-nav ul li a:hover,
+.main-nav ul li a:focus-visible{
   color: var(--text-black);
   background-color: var(--accent-inverted);
 }
@@ -489,6 +534,11 @@ THEME TOGGLE
   @media (width > 50em){
     --track-width: 4rem;
     --track-height: 2rem;
+  }
+
+  @media (height < 35em){
+    --track-width: 3rem;
+    --track-height: 1.5rem;
   }
 }
 
@@ -590,6 +640,10 @@ body[data-theme="dark"] .theme-text {
   z-index: -1;
   filter: blur(0px);
   transition: filter 350ms ease;
+
+  @media (height < 35em){
+    height: 40svh;
+  }
 }
 
 .heroBG{
@@ -612,6 +666,12 @@ body[data-theme="dark"] .theme-text {
     top: -10%;
     left: -30%;
     width: 70%;
+  }
+
+  @media (height < 35em){
+    width: 100%;
+    top: 12%;
+    left: 0;
   }
 
   @media (prefers-color-scheme: dark){
@@ -646,6 +706,10 @@ body[data-theme="dark"] .theme-text {
 
   @media (width > 75em){
     margin-top: 55vh !important;
+  }
+
+  @media (height < 35em){
+    margin-top: 0 !important;
   }
 }
 
@@ -759,6 +823,10 @@ main{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   gap: var(--gap);
+
+  @media (height < 35em){
+    grid-template-columns: repeat(auto-fit, minmax(5em, 1fr)) !important;
+  }
 }
 
 .img-right img{
@@ -938,11 +1006,21 @@ section{
   grid-row: span 2;
   grid-column: span 2;
   aspect-ratio: 1 / 1.35;
+
+  @media (height < 35em){
+    grid-row: 1;
+    grid-column: 1;
+    aspect-ratio: 1 / 1;
+  }
 }
 
 .projects:first-child img{
   @media (width > 50em){
     aspect-ratio: 1 / 1.2;
+  }
+
+  @media (height < 35em){
+    aspect-ratio: 1 / 1;
   }
 }
 
@@ -1043,7 +1121,6 @@ footer{
 }
 
 
-
 @media (width < 70em){
   .hero > img{
     translate: -15%;
@@ -1082,10 +1159,10 @@ footer{
 
 @media (width < 60em){
   :root{
-      --border-radius: .5rem;
+      --border-radius: .75rem;
       --flex-dir: column;
       --gap: .5rem;
-      --fs: .7em;
+      --fs: .9em;
   }
 
   .socialmedia ul{
@@ -1148,25 +1225,16 @@ footer{
   .service{
     width: 100%;
     display: grid;
-    grid-template-columns: 30% 1fr;
-    grid-template-rows: 10% 1fr;
-  }
+    grid-template-columns: 30% auto;
+    gap: var(--gap);
 
-  .service img{
-    grid-column: 1;
-    grid-row: 1 / -1;
-  }
+    @media (height < 35em){
+      grid-template-columns: 1fr;
 
-  .service h5, .service p{
-    grid-column: 2;
-  }
-
-  .service h5{
-    grid-row: 1;
-  }
-
-  .service p{
-    grid-row: 2;
+      svg{
+        width: 50%;
+      }
+    }
   }
 
   .postdesign{
