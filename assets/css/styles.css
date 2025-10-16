@@ -542,8 +542,8 @@ THEME TOGGLE
 
   @media (height < 35em){
     .theme-switch{
-        --track-width: 4rem;
-        --track-height: 2rem;
+        --track-width: 3rem;
+        --track-height: 1.5rem;
     }
   }
 
@@ -590,7 +590,7 @@ THEME TOGGLE
   background-image: url(/assets/img/darktheme.svg);
   background-repeat: no-repeat;
   object-fit: cover;
-  background-size: calc(var(--track-height) - calc(var(--track-padding)*2));
+  background-size: calc(var(--track-height) - calc(var(--track-padding) * 2));
   width: 100%;
   aspect-ratio: 1 / 1;
   transition: 0.4s;
@@ -603,13 +603,13 @@ THEME TOGGLE
 
 /* Move the slider thumb to the right when checked */
 #theme-toggle:checked + .slider:before {
-  --translate: calc(var(--track-height) - calc(var(--track-height)*.1));
+  --translate: calc(var(--track-height) - calc(var(--track-height) * 0.1));
 
   transform: translateX(var(--translate)); /* 60px (track width) - 34px (track height) = 26px */
 }
 
 #theme-toggle:checked + .slider:after {
-  --translate: calc(var(--track-height) - calc(var(--track-height)*.1));
+  --translate: calc(var(--track-height) - calc(var(--track-height) * 0.1));
 
   transform: translateX(var(--translate)); /* 60px (track width) - 34px (track height) = 26px */
   background-image: url(/assets/img/lighttheme.svg);
