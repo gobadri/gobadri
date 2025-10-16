@@ -530,17 +530,22 @@ THEME TOGGLE
   width: var(--track-width); /* Width of the track */
   height: var(--track-height); /* Height of the track */
   justify-self: center;
+}
+
 
   @media (width > 50em){
-    --track-width: 4rem;
-    --track-height: 2rem;
+      .theme-switch{
+        --track-width: 4rem;
+        --track-height: 2rem;
+      }
   }
 
   @media (height < 35em){
-    --track-width: 3rem;
-    --track-height: 1.5rem;
+    .theme-switch{
+        --track-width: 4rem;
+        --track-height: 2rem;
+    }
   }
-}
 
 /* Hide the default browser checkbox */
 .theme-switch input {
