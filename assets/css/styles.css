@@ -524,28 +524,24 @@ THEME TOGGLE
 .theme-switch {
   --track-width: 3rem;
   --track-height: 1.5rem;
+  --translate: calc(var(--track-height) - calc(var(--track-height)*.1));
 
   position: relative;
   display: inline-block;
   width: var(--track-width); /* Width of the track */
   height: var(--track-height); /* Height of the track */
   justify-self: center;
-}
-
 
   @media (width > 50em){
-      .theme-switch{
-        --track-width: 4rem;
-        --track-height: 2rem;
-      }
+    --track-width: 4rem;
+    --track-height: 2rem;
   }
 
   @media (height < 35em){
-    .theme-switch{
-        --track-width: 3rem;
-        --track-height: 1.5rem;
-    }
+    --track-width: 3rem;
+    --track-height: 1.5rem;
   }
+}
 
 /* Hide the default browser checkbox */
 .theme-switch input {
@@ -587,10 +583,10 @@ THEME TOGGLE
   aspect-ratio: 1 / 1;
   left: 0; /* Starting position inside the track */
   top: 0;
-  background-image: url(/assets/img/darktheme.svg);
+  background-image: url(../assets/img/darktheme.svg);
   background-repeat: no-repeat;
   object-fit: cover;
-  background-size: calc(var(--track-height) - calc(var(--track-padding) * 2));
+  background-size: calc(var(--track-height) - calc(var(--track-padding)*2));
   width: 100%;
   aspect-ratio: 1 / 1;
   transition: 0.4s;
@@ -603,16 +599,12 @@ THEME TOGGLE
 
 /* Move the slider thumb to the right when checked */
 #theme-toggle:checked + .slider:before {
-  --translate: calc(var(--track-height) - calc(var(--track-height) * 0.1));
-
   transform: translateX(var(--translate)); /* 60px (track width) - 34px (track height) = 26px */
 }
 
 #theme-toggle:checked + .slider:after {
-  --translate: calc(var(--track-height) - calc(var(--track-height) * 0.1));
-
   transform: translateX(var(--translate)); /* 60px (track width) - 34px (track height) = 26px */
-  background-image: url(/assets/img/lighttheme.svg);
+  background-image: url(../assets/img/lighttheme.svg);
 }
 
 /* Change the track background color when checked */
