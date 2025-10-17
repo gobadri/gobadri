@@ -1718,7 +1718,7 @@ section{
   gap: var(--gap);
 
   @media (width > 50em){
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(15em, 100%), 1fr));
   }
 
   img{
@@ -1728,6 +1728,7 @@ section{
     border-radius: calc(var(--border-radius)*1.5);
   }
 }
+
 
 .logo-variation{
   display: grid;
